@@ -1,3 +1,13 @@
+"""
+ This example shows having multiple balls bouncing around the screen at the
+ same time. You can hit the space bar to spawn more balls.
+
+ Sample Python/Pygame Programs
+ Simpson College Computer Science
+ http://programarcadegames.com/
+ http://simpson.edu/computer-science/
+"""
+
 import pygame
 import random
 
@@ -78,7 +88,10 @@ def main():
             # Move the ball's center
             ball.x += ball.change_x
             ball.y += ball.change_y
+<<<<<<< HEAD
             #ball.x +=
+=======
+>>>>>>> e315365383e80af6d5ff541ab510dd2aa774d0b0
 
             # Bounce the ball if needed
             if ball.y > SCREEN_HEIGHT - BALL_SIZE or ball.y < BALL_SIZE:
