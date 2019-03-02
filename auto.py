@@ -78,7 +78,14 @@ def main():
             # Move the ball's center
             ball.x += ball.change_x
             ball.y += ball.change_y
+<<<<<<< HEAD
             ball.x +=1
+=======
+<<<<<<< HEAD
+            #ball.x +=
+=======
+>>>>>>> e315365383e80af6d5ff541ab510dd2aa774d0b0
+>>>>>>> c612684d8d8b81d9a8557462144a92c8cc5ce9fb
 
             # Bounce the ball if needed
             if ball.y > SCREEN_HEIGHT - BALL_SIZE or ball.y < BALL_SIZE:
