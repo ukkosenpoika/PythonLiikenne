@@ -1,9 +1,10 @@
 import random
 import pygame
+import math
 from sys import exit
 
 #värit
-BLACK   = (0,   0,   0  )
+BLACK   = (150, 150, 150)
 WHITE   = (255, 255, 255)
 BLUE    = (0,   102, 204)
 ORANGE  = (255, 128, 9  )
@@ -14,30 +15,106 @@ PINK    = (255, 0,   255)
 #pelinäyttö
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 800
+BALL_SIZE = 10
 
-varit = ["sininen","valkoinen","oranssi","violetti","keltainen","pinkki"] #maholliset värit pelissä
+varit = [BLUE,WHITE,ORANGE,VIOLET,YELLOW,PINK] #maholliset värit pelissä
+
 lkm = 4 #montako on per rivi
 tietokone = [] #tähän tietokone randomilla valkkaapi värit
+ball_list = []
+ball_list_koords = []
 
 
 def main():
+    pygame.init()
+    size = [SCREEN_WIDTH, SCREEN_HEIGHT]
+    screen = pygame.display.set_mode(size)
+    screen.fill(BLACK)
+    pygame.display.set_caption("MasterMind")
 
+    clock = pygame.time.Clock()
+
+    ####
     while len(tietokone) < lkm:
         tietokone.append(random.choice(varit))
 
-    print("anna värit yksitellen (tai välilyönnillä erotettuna) [sininen,valkoinen,oranssi,violetti,keltainen,pinkki] :")
+    print("anna värit yksitellen (tai välilyönnillä erotettuna) [BLUE, WHITE, ORANGE, VIOLET, YELLOW, PINK] :")
     print("______________________")
-    peli()
+    #peli()
+
     #tossa ylempänä se teki ton pelin
 
-
-    pygame.init()
-    screen()
     clock = pygame.time.Clock()
-    clock.tick(60)
+    done1 = False
+    mouseClick = False
 
-    # Go ahead and update the screen with what we've drawn.
-    pygame.display.flip()
+    for i in range(6):
+        ball = make_ball(i*50,0,varit[i])
+        ball_list.append(ball)
+        ball_list_koords.extend([[ball.x,ball.y]])
+        #print(ball_list_koords[-1])
+    print(*ball_list_koords,sep='\n')
+
+
+    while not done1:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done1 = True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouseClick = True
+
+            if mouseClick == True:
+                position = pygame.mouse.get_pos()
+                mouseClick = False
+                #print(position)
+                #lasketaan hiiren klikkauksen matka pallon keskipisteestä
+                distance = math.sqrt((position[0]-ball.x)**2 + (position[1]-ball.y)**2)
+                print(distance)
+
+                if distance < float(BALL_SIZE):
+                    print("ollaan pallon sisällä")
+            #VÄRI PALLOT
+            """
+            for i in range(6):
+                ball = make_ball(i*50,0,varit[i])
+                ball_list.append(ball)
+                ball_list_koords.extend([ball.x,ball.y])
+            print(ball_list_koords)
+            """
+                #ball_list_color.extend([ball.color])
+
+            for pallo in ball_list:
+                for vari in varit:
+
+                    pygame.draw.circle(screen, pallo.color, [pallo.x, pallo.y], BALL_SIZE)
+
+            #for i in range(len(ball_list)):
+            #    pygame.draw.circle(screen, varit[i], [ball[i].x, ball[i].y], BALL_SIZE)
+
+            clock.tick(20)
+            pygame.display.flip()
+
+            """
+            while len(pallot) < 5:
+                for i in range()
+                ball = make_ball(0.0)
+                x_1 = 100
+            """
+
+
+
+class Ball:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.color = None
+
+def make_ball(x_1,y_1,vari):
+    ball = Ball()
+    ball.x = 100+x_1
+    ball.y = 100+y_1
+    ball.color = vari
+    return ball
 
 def screen():
     size = [SCREEN_WIDTH, SCREEN_HEIGHT]
@@ -111,4 +188,5 @@ def peli():
         print("tässä rivin tulos: ",tulokset)
         print("______________________")
 
-main()
+if __name__ == "__main__":
+    main()
