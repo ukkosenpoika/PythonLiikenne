@@ -4,7 +4,8 @@ import math
 from sys import exit
 
 #värit
-BLACK   = (150, 150, 150)
+BLACK   = (0,   0,     0)
+GREY    = (200, 200, 200)
 WHITE   = (255, 255, 255)
 BLUE    = (0,   102, 204)
 ORANGE  = (255, 128, 9  )
@@ -29,7 +30,7 @@ def main():
     pygame.init()
     size = [SCREEN_WIDTH, SCREEN_HEIGHT]
     screen = pygame.display.set_mode(size)
-    screen.fill(BLACK)
+    screen.fill(GREY)
     pygame.display.set_caption("MasterMind")
 
     clock = pygame.time.Clock()
