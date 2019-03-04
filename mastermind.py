@@ -173,7 +173,7 @@ def peli():
                 vali_ratkaisu.append(tietokone[i])
 
         for i in range(len(arvaus_muunnos)):
-            #if arvaus_muunnos[i] in vali_ratkaisu:
+            if arvaus_muunnos[i] in vali_ratkaisu:
 
 
                 g = (i for i, e in enumerate(vali_ratkaisu) if e in arvaus_muunnos)
